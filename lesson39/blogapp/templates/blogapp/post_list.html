@@ -1,0 +1,26 @@
+{% extends 'blogapp/base.html' %}
+{% load cache %}
+
+{% block title %}
+    Post List
+{% endblock title %}
+
+
+{% block content %}
+    <h1>Post List</h1>
+    <h2>{{ tag_count }}</h2>
+        {% for tag in tag_list %}
+            <a href="{% url 'post_tag_list' tag.name %}">{{ tag }}  </a>
+        {% endfor %}
+
+
+    <p><a href="{% url 'post_create' %}">Create Post</a></p>
+
+    {% for post in post_list %}
+        <p>{{ post.title }} - {{ post.author }}</p>
+        <p><a href="{% url 'post_detail' post.slug %}">Detail</a></p>
+        <br>
+    {% endfor %}
+
+{% endblock content %}
+
